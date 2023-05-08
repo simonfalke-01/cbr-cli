@@ -19,6 +19,8 @@ func main() {
 		fmt.Println("To avoid getting the password prompt again, press the \"Always Allow\" button.")
 	}
 
+	fmt.Println("Submitting solution...")
+	
 	cookie := kooky.ReadCookies(kooky.Valid, kooky.DomainHasSuffix(`codebreaker.xyz`), kooky.Name(`google-login-session`))[0].Value
 	problemName := os.Args[1]
 	urlStr := fmt.Sprintf("https://codebreaker.xyz/problem/%s", problemName)
