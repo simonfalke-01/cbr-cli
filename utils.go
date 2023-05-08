@@ -54,7 +54,11 @@ func askOpenBrowser(url string) {
 
 func checkArgs(num int) {
 	if len(os.Args) < num {
-		fmt.Println("Usage: ./cbr <problem name> <solution path>")
+		fmt.Println("Usage: ./cbr <problem-id> <path-to-solution>")
 		os.Exit(1)
 	}
+}
+
+func checkIfDarwin() bool {
+	return runtime.GOOS == "darwin"
 }
