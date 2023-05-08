@@ -17,7 +17,6 @@ func main() {
 	if checkIfDarwin() {
 		fmt.Println("For macOS users, you may encounter a prompt asking for your password. This is because the program needs to access your keychain to get your session cookie. Do not be alarmed, as the program does not store your passwords or your session cookie, and the data does not leave your machine.")
 		fmt.Println("To avoid getting the password prompt again, press the \"Always Allow\" button.")
-		os.Exit(1)
 	}
 
 	cookie := kooky.ReadCookies(kooky.Valid, kooky.DomainHasSuffix(`codebreaker.xyz`), kooky.Name(`google-login-session`))[0].Value
