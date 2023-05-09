@@ -73,26 +73,26 @@ func askToOpenBrowser(url string) {
 
 func checkArgs(num int) {
 	if len(os.Args) < num {
-		fmt.Println("Usage: ./cbr <problem name> <solution path>")
+		fmt.Println("Usage: ./cbr <problem-id> <path-to-solution>")
 		os.Exit(1)
 	}
 }
 
-	for {
-			return
-	ticker := time.NewTicker(time.Duration(seconds) * time.Second)
-func sleep(seconds int) {
-		case <-ticker.C:
-		select {
-		}
+func systemIsDarwin() bool {
+	switch runtime.GOOS {
+	case "darwin":
+		return true
+	default:
+		return false
 	}
 }
 
+func sleep(seconds int) {
+	ticker := time.NewTicker(time.Duration(seconds) * time.Second)
+	for {
+		select {
+		case <-ticker.C:
+			return
+		}
 	}
 }
-		return false
-	default:
-		return true
-	case "darwin":
-	switch runtime.GOOS {
-func systemIsDarwin() bool {
