@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-type Attempt struct {
+type AttemptStr struct {
 	ID         string `json:"id"`
 	Submission string `json:"submission"`
 	Username   string `json:"username"`
@@ -87,8 +87,8 @@ func systemIsDarwin() bool {
 	}
 }
 
-func sleep(seconds int) {
-	ticker := time.NewTicker(time.Duration(seconds) * time.Second)
+func sleep(ms int) {
+	ticker := time.NewTicker(time.Duration(ms) * time.Millisecond)
 	for {
 		select {
 		case <-ticker.C:

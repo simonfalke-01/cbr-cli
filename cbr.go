@@ -37,7 +37,7 @@ func main() {
 		}
 	}(resp.Body)
 
-	var attemptsList []Attempt
+	var attemptsList []AttemptStr
 	err = json.NewDecoder(resp.Body).Decode(&attemptsList)
 	if err != nil {
 		panic(err)
@@ -59,20 +59,8 @@ func main() {
 	resp = submit(urlStr, string(code), cookie)
 
 	if resp.StatusCode == 200 {
-		resp := getPage(fmt.Sprintf("https://codebreaker.xyz/submission/%s", strconv.Itoa(latestId)))
-		verdict := parseVerdict(resp)
-		fmt.Println(verdict)
-		//lines := displayVerdict(verdict)
-
-		for hasIncomplete(verdict) {
-			fmt.Println("not complete")
-			//clearLines(lines)
-			resp := getPage(fmt.Sprintf("https://codebreaker.xyz/submission/%s", strconv.Itoa(latestId)))
-			verdict := parseVerdict(resp)
-			displayVerdict(verdict)
-
-			sleep(1)
-		}
+		verdict := getVerdict(latestId)
+		displayVerdict(verdict)
 	} else {
 		fmt.Println("Submission failed.")
 		fmt.Println("Status code:", resp.StatusCode)

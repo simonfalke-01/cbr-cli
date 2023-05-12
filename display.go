@@ -1,34 +1,49 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"os/exec"
+)
 
-func clearLines(lines int) {
-	for i := 0; i < lines; i++ {
-		fmt.Printf("\033[1A\x1b[2K")
+func lessDisplay(s string) {
+	cmdStr := fmt.Sprintf("echo \"%s\" | less", s)
+	cmd := exec.Command("bash", "-c", cmdStr, "-R")
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+
+	if err := cmd.Run(); err != nil {
+		panic(err)
 	}
 }
 
-func displayVerdict(verdict Verdict) int {
-	fmt.Printf("Verdict:\n")
-
-	lines := 1
-	// Display the Subtasks in the side view
-	for subtaskNum, subtaskTests := range verdict {
-		fmt.Printf("Subtask %d:\n", subtaskNum)
-		lines++
-		for _, test := range subtaskTests {
-			fmt.Printf("- Test Case %s:\n", test.ID)
-			fmt.Printf("    Score: %s\n", test.Score)
-			fmt.Printf("    Time: %s\n", test.Time)
-			fmt.Printf("    Memory: %s\n", test.Memory)
-			fmt.Printf("    Verdict: %s\n", test.Verdict)
-			lines += 5
+func displayVerdict(verdict Verdict) {
+	// display all non-ac testcases for each subtask
+	ac := true
+	var lessDisplayStr string
+	for i, subtask := range verdict {
+		printed := false
+		for _, testCase := range subtask {
+			if testCase.Verdict != "AC" {
+				ac = false
+				if !printed {
+					lessDisplayStr += fmt.Sprintf("Subtask %d:\n", i)
+					printed = true
+				}
+				lessDisplayStr += fmt.Sprintf("- Test Case %s:\n", testCase.ID)
+				lessDisplayStr += fmt.Sprintf("    Score: %s\n", testCase.Score)
+				lessDisplayStr += fmt.Sprintf("    Time: %s\n", testCase.Time)
+				lessDisplayStr += fmt.Sprintf("    Memory: %s\n", testCase.Memory)
+				lessDisplayStr += fmt.Sprintf("    Verdict: %s\n", testCase.Verdict)
+			}
 		}
-		fmt.Printf("\n")
-		lines++
 	}
 
-	return lines
+	if !ac {
+		lessDisplay(lessDisplayStr)
+	} else {
+		fmt.Println("Hurray! AC!")
+	}
 }
 
 func hasIncomplete(verdict Verdict) bool {
