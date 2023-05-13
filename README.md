@@ -14,10 +14,7 @@ Example: </br>
 ### macOS
 `wget https://github.com/simonfalke-01/cbr-cli/releases/latest/download/cbr-darwin && chmod +x ./cbr-darwin && mv ./cbr-darwin /usr/local/bin/cbr`
 ### Windows
-If you are a windows user I don't get why you would ever prefer the cmd prompt or PowerShell over the actual codebreaker webpage.
-Like seriously. Imagine having such a god awful "terminal". </br>
-But if you really want to use it? **Clone the repository and build it from source.** </br>
-**I will not provide Windows builds because I don't have access to a Windows machine.**
+Check the GitHub Actions tab for Windows builds.
 
 ## Disclaimer
 This is not an official utility. This is a personal project and is not affiliated with codebreaker.xyz in any way.
