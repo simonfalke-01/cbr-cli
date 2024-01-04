@@ -1,3 +1,8 @@
+# **Codebreaker API is down. This project is no longer maintained.**
+
+
+
+
 # cbr-cli
 Submit your solutions to codebreaker.xyz without leaving the terminal.
 This is a cli utility written in Go that allows you to directly submit your solutions to a problem to codebreaker.xyz,
